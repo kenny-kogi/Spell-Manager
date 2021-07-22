@@ -1,0 +1,2 @@
+class SpellBook < ApplicationRecord
+end
