@@ -1,0 +1,21 @@
+<h1>Spells</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>SpellName</th>
+      <th>Edit Spell</th>
+      <th>Delete Spell</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @spells.each do |spell| %>
+      <tr>
+        <td><%= link_to spell.name, spell_path(spell) %></td>
+        <td><%= link_to "Edit Spell", edit_spell_path(spell)%></td>
+        <td><%= link_to "Delete Spell", spell, method: :delete%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Create New Spell", new_spell_url(@spells), class: "link-to-spell"%>

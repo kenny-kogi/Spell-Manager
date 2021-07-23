@@ -1,6 +1,11 @@
 class Spell < ApplicationRecord
-    validates :name, presence :true, length: { maximum: 70 }
-    validates :school, presence :true, length: { maximum: 20 }
-    validates :classes, presence :true, length: { maximum: 10 }
-    validates :concentration, presence :true
+    validates :name, presence: true
+    validates_uniqueness_of :name, :case_sensitive => false
+    validates :school, presence: true
+    validates :classes, presence: true
+    validates_length_of :description, :maximum => 4096
+    has_many :spell_books
+
+    enum school: [:Conjuration, :Necromancy, :Evocation, :Abjuration, :Transmutation, :Divination, :Enchantment, :Illusion]
+
 end

@@ -1,0 +1,33 @@
+<%= form_with(model: spell, local: true) do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name%>
+  </div>
+    <br>
+    <div>
+    <%= form.label :level %>
+    <%= form.number_field :level %>
+  </div>
+    <br>
+    <div>
+    <%= form.label :school %>
+    <%= form.text_field :school%>
+    </div>
+    <br>
+    <div>
+    <%= form.label :classes %>
+    <%= form.text_field :classes %>
+    </div>
+    <br>
+    <div>
+    <%= form.label :concentration %>
+    <%= form.text_field :concentration %>
+    </div>
+    <br>
+    <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+    </div>
+    <br>
+  <%= form.submit %>
+<% end %>
