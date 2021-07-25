@@ -1,35 +1,31 @@
 <h1>Show Spell</h1>
 <div>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Level</th>
-      <th>School</th>
-      <th>Classes</th>
-      <th>Concentration</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
+  <table>
+    <thead>
       <tr>
-        <td><%= @spells.name%></td>
-        <td><%= @spells.level%></td>
-        <td><%= @spells.school%></td>
-        <td><%= @spells.classes%></td>
-        <td><%= @spells.concentration%></td>
-        <td><%= @spells.description%></td>
+        <th>Name</th>
+        <th>Level</th>
+        <th>School</th>
+        <th>Classes</th>
+        <th>Concentration</th>
+        <th>Description</th>
       </tr>
-  </tbody>  
-</table>
+    </thead>
+    <tbody>
+        <tr>
+          <td><%= @spell.name%></td>
+          <td><%= @spell.level%></td>
+          <td><%= @spell.school%></td>
+          <td><%= @spell.classes%></td>
+          <td><%= @spell.concentration%></td>
+          <td><%= @spell.description%></td>
+        </tr>
+    </tbody>
+  </table>
 </div>
 
-<h2>Add Spell to Book</h2>
-
-  <%= form_with(url: spell_books_path, method: "post", local: true) do |form| %>
-    <%= form.hidden_field :spells_id, value: @spells.id %>
-    <%= form.select(:book_id, @books) %>
-    <%= form.submit %>
-  <% end %>
-
+<%= link_to "Edit Spell", edit_spell_path(@spell) %> &ensp;
+<%= link_to "View Spells", spells_path %> &ensp;
+<%= link_to "Create New Book", new_book_path %> &ensp;
+<%= link_to "View Books", books_path %>
 

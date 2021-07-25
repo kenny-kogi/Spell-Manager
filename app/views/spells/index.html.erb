@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>SpellName</th>
+      <th>Add Spell To Book</th>
       <th>Edit Spell</th>
       <th>Delete Spell</th>
     </tr>
@@ -12,10 +13,13 @@
     <% @spells.each do |spell| %>
       <tr>
         <td><%= link_to spell.name, spell_path(spell) %></td>
+        <td><%= link_to "Add to Book", new_spell_book_path(spell_id: spell.id)%></td>
         <td><%= link_to "Edit Spell", edit_spell_path(spell)%></td>
         <td><%= link_to "Delete Spell", spell, method: :delete%></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= link_to "Create New Spell", new_spell_url(@spells), class: "link-to-spell"%>
+<%= link_to "Create New Spell", new_spell_path %> &ensp;
+<%= link_to "Create New Book", new_book_path %> &ensp;
+<%= link_to "View Books", books_path %>

@@ -1,0 +1,18 @@
+<h1>Add Spell to Book</h2>
+
+<%= form_for @spell_book do |form| %>
+  <% if @spell_book.errors.any? %>
+    <ul>
+    <% @spell_book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  <%= form.hidden_field :spell_id, value: @spell %>
+  <%= form.select :book_id, @books.collect { |book| [ book.name, book.id] } %>
+  <%= form.submit "Add to book" %>
+<% end %>
+
+<%= link_to "Create New Spell", new_spell_path %> &ensp;
+<%= link_to "Create New Book", new_book_path %> &ensp;
+<%= link_to "View Books", books_path %>

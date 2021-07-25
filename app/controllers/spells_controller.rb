@@ -1,57 +1,66 @@
 class SpellsController < ApplicationController
+  before_action :set_spell, only: [:show, :edit, :update, :destroy, :choose_book, :add_to_book]
   def index
     @spells = Spell.all
   end
 
   def show
-    @spells = Spell.find params[:id]
-    @books = Book.all.map{ |u| [ u.name, u.id ] }
   end
 
   def create
-    @spells = Spell.new(spell_params)
-    if @spells.save
-      flash[:success] = "Spell successfully created"
+    @spell = Spell.new(spell_params)
+    if @spell.save
+      flash[:success] = "Successfully created #{@spell.name}"
       redirect_to spells_path
-      return
     else
-      flash.now[:messages] = @spells.errors.full_messages
       render :new
     end
   end
 
   def edit
-    @spells = Spell.find params[:id]
   end
 
   def update
-    @spells = Spell.find params[:id]
-    if @spells.update(spell_params)
-      flash[:success] = "Spell successfully Updated"
+    if @spell.update(spell_params)
+      flash[:success] = "Successfully updated #{@spell.name}"
       redirect_to spells_path
     else
-      flash.now[:messages] = @spells.errors.full_messages
       render :edit
     end
   end
 
   def new
-    @spells = Spell.new
-  end
-  
-  def destroy
-    @spells = Spell.find params[:id]
-    @spells.delete
-    redirect_to spells_path
-    flash[:success] = "Spell successfully Deleted"
+    @spell = Spell.new
   end
 
-  def delete
-    @spells = Spell.find [:id]
+  def destroy
+    @spell.delete
+    flash[:success] = "Successfully deleted #{@spell.name}"
+    redirect_to spells_path
+  end
+
+  def choose_book
+    @spell_book = SpellBook.new
+    @books = Book.all
+  end
+
+  def add_to_book
+    @books = Book.all
+    @spell_book = @spell.spell_books.build(book_id: params[:spell_book][:book_id])
+    if @spell_book.save
+      flash[:success] = "Successfully updated #{@spell.name}"
+      redirect_to spells_path
+    else
+      render :choose_book
+    end
   end
 
   private
-    def spell_params
-      params.require(:spell).permit(:name, :level, :school, :classes, :concentration, :description)
-    end
+  def spell_params
+    params.require(:spell).permit(:name, :level, :school, :concentration, :description, classes: [])
+  end
+
+  def set_spell
+    @spell = Spell.find params[:id]
+  end
 end

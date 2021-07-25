@@ -1,4 +1,11 @@
-<%= form_with(model: spell, local: true) do |form| %>
+<%= form_for spell do |form| %>
+  <% if spell.errors.any? %>
+    <ul>
+    <% spell.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
   <div>
     <%= form.label :name %>
     <%= form.text_field :name%>
@@ -6,22 +13,25 @@
     <br>
     <div>
     <%= form.label :level %>
-    <%= form.number_field :level %>
+    <%= form.number_field :level, max: 9, min: 0 %>
   </div>
     <br>
     <div>
     <%= form.label :school %>
-    <%= form.text_field :school%>
+    <%= form.select :school, Spell::SCHOOL_OPTIONS, prompt: "Select a School" %>
     </div>
     <br>
     <div>
     <%= form.label :classes %>
-    <%= form.text_field :classes %>
+    <% Spell::CLASS_OPTIONS.each do |c| %>
+      <%= form.check_box :classes, { multiple: true }, c, false %>
+      <%= c %>
+    <% end %>
     </div>
     <br>
     <div>
     <%= form.label :concentration %>
-    <%= form.text_field :concentration %>
+    <%= form.select :concentration, options_for_select([['No', false], ['Yes', true]]) %>
     </div>
     <br>
     <div>

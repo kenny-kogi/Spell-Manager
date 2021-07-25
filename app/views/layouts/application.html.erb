@@ -11,13 +11,13 @@
   </head>
 
   <body>
-    <%= yield %>
-  <% if flash.any? %>
-    <% flash.each do |type, msg| %>
-      <div>
-      <%= msg %>
-      </div>
+    <% if flash.any? %>
+      <% flash.each do |type, msg| %>
+        <div>
+        <%= msg %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+    <%= yield %>
   </body>
 </html>

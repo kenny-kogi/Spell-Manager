@@ -10,37 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_22_232212) do
+ActiveRecord::Schema.define(version: 2021_07_22_081517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "books", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 70, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "spell_books", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "spell_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "spells_id"
-    t.bigint "books_id"
-    t.index ["books_id"], name: "index_spell_books_on_books_id", unique: true
-    t.index ["spells_id"], name: "index_spell_books_on_spells_id", unique: true
+    t.index ["book_id"], name: "index_spell_books_on_book_id"
+    t.index ["spell_id", "book_id"], name: "index_spell_books_on_spell_id_and_book_id", unique: true
+    t.index ["spell_id"], name: "index_spell_books_on_spell_id"
   end
 
   create_table "spells", force: :cascade do |t|
     t.string "name", limit: 70, null: false
-    t.integer "level", null: false
-    t.string "school", default: "0", null: false
-    t.string "classes", limit: 10, null: false
-    t.boolean "concentration", null: false
-    t.string "description", limit: 60, null: false
+    t.integer "level", default: 0, null: false
+    t.string "school", limit: 30, null: false
+    t.string "classes", default: [], null: false, array: true
+    t.boolean "concentration", default: false, null: false
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "spell_books", "books", column: "books_id"
-  add_foreign_key "spell_books", "spells", column: "spells_id"
+  add_foreign_key "spell_books", "books"
+  add_foreign_key "spell_books", "spells"
 end

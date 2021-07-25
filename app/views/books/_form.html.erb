@@ -1,7 +1,14 @@
-<%= form_with(model: book, local: true) do |form| %>
-    <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-    </div>
-    <%= form.submit %>
+<%= form_for book do |form| %>
+  <% if book.errors.any? %>
+    <ul>
+    <% book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  <div>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  </div>
+  <%= form.submit %>
 <% end %>
