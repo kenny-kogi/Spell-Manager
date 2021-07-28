@@ -1,7 +1,7 @@
 class Spell < ApplicationRecord
   has_many :spell_books, dependent: :destroy
   has_many :books, through: :spells
-
+  
   SCHOOL_OPTIONS = ['Conjuration', 'Necromancy', 'Evocation', 'Abjuration', 'Transmutation', 'Divination', 'Enchantment', 'Illusion']
   CLASS_OPTIONS = ['Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Sorcerer', 'Warlock', 'Wizard']
   validates :name, presence: true, uniqueness: { case_sensitive: false, message: "Name cannot be the same as an existing spell. Case insensitive"}

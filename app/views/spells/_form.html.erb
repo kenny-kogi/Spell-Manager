@@ -6,19 +6,25 @@
     <% end %>
     </ul>
   <% end %>
+
+  <div>
+    <%= form.label :level %>
+    <%= form.number_field :level, max: 9, min: 0 %>
+  </div>
+  <br>
   <div>
     <%= form.label :name %>
     <%= form.text_field :name%>
   </div>
     <br>
-    <div>
-    <%= form.label :level %>
-    <%= form.number_field :level, max: 9, min: 0 %>
+  <div>
+  <%= form.label :school %>
+  <%= form.select :school, Spell::SCHOOL_OPTIONS, prompt: "Select a School" %>
   </div>
     <br>
     <div>
-    <%= form.label :school %>
-    <%= form.select :school, Spell::SCHOOL_OPTIONS, prompt: "Select a School" %>
+    <%= form.label :concentration %>
+    <%= form.select :concentration, options_for_select([['No', false], ['Yes', true]]) %>
     </div>
     <br>
     <div>
@@ -27,11 +33,6 @@
       <%= form.check_box :classes, { multiple: true }, c, false %>
       <%= c %>
     <% end %>
-    </div>
-    <br>
-    <div>
-    <%= form.label :concentration %>
-    <%= form.select :concentration, options_for_select([['No', false], ['Yes', true]]) %>
     </div>
     <br>
     <div>
