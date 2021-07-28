@@ -9,7 +9,7 @@ class SpellBooksController < ApplicationController
       render :new
     end
   end
-
+  
   def new
     @books = Book.all
     @spell = params[:spell_id]
@@ -17,9 +17,9 @@ class SpellBooksController < ApplicationController
   end
 
   def destroy
-    @spell_book = SpellBook.find params[:id]
-    @spell_book.delete
-    flash[:success] = "Successfully deleted #{@spell_book.name}"
+    @spell_book = SpellBook.where('spell_id = ?', params[:id])
+    @spell_book.destroy_all
+    flash[:success] = "Successfully deleted from #{@spell_book.name}"
     redirect_to spells_path
   end
 

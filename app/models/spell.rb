@@ -1,5 +1,5 @@
 class Spell < ApplicationRecord
-  has_many :spell_books
+  has_many :spell_books, dependent: :destroy
   has_many :books, through: :spells
 
   SCHOOL_OPTIONS = ['Conjuration', 'Necromancy', 'Evocation', 'Abjuration', 'Transmutation', 'Divination', 'Enchantment', 'Illusion']

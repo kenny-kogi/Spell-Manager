@@ -34,26 +34,26 @@ class SpellsController < ApplicationController
   end
 
   def destroy
-    @spell.delete
+    @spell.destroy
     flash[:success] = "Successfully deleted #{@spell.name}"
     redirect_to spells_path
   end
+  
+  # def choose_book
+  #   @spell_book = SpellBook.new
+  #   @books = Book.all
+  # end
 
-  def choose_book
-    @spell_book = SpellBook.new
-    @books = Book.all
-  end
-
-  def add_to_book
-    @books = Book.all
-    @spell_book = @spell.spell_books.build(book_id: params[:spell_book][:book_id])
-    if @spell_book.save
-      flash[:success] = "Successfully updated #{@spell.name}"
-      redirect_to spells_path
-    else
-      render :choose_book
-    end
-  end
+  # def add_to_book
+  #   @books = Book.all
+  #   @spell_book = @spell.spell_books.build(book_id: params[:spell_book][:book_id])
+  #   if @spell_book.save
+  #     flash[:success] = "Successfully updated #{@spell.name}"
+  #     redirect_to spells_path
+  #   else
+  #     render :choose_book
+  #   end
+  # end
 
   private
   def spell_params

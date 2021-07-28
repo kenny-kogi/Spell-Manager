@@ -24,4 +24,5 @@
 <%= link_to "Edit Book", edit_book_path(@book) %> &ensp;
 <%= link_to "View Spells", spells_path %> &ensp;
 <%= link_to "Create New Book", new_book_path %> &ensp;
-<%= link_to "View Books", books_path %>
+<%= link_to "View Books", books_path %> &ensp;
+<%= link_to "Delete Book", @book, method: :delete%>
