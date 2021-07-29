@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    @books = Book.order_by params[:order_by]
   end
 
   def create
@@ -39,6 +39,11 @@ class BooksController < ApplicationController
     redirect_to books_path
   end
 
+  def add_to_book
+    @spell = Spell.all
+    @book = Book.find params[:id]
+  end
+
   private
   def set_book
     @book = Book.find params[:id]
@@ -47,4 +52,4 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:name)
   end
-end
+end 

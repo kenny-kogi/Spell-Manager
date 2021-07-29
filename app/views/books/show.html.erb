@@ -1,8 +1,11 @@
-<h1> View Book</h1>
-
+<h1> View <%= @book.name %></h1>
 <div>
-  <p><%= @book.name %></p>
-  <h2> Spells </h2>
+  <span class="left"><%= link_to "All Books", books_path %></span>
+  <span class="right"><%= link_to "Home", root_path %></span>
+</div>
+<br>
+<br>
+<div>
   <table style="border: 1px solid black">
     <thead>
       <tr>
@@ -14,15 +17,11 @@
       <% @book.spells.each do |spell| %>
       <tr>
         <td><%= link_to spell.name, spell_path(spell) %></td>
-        <td><%= link_to "Remove", spell_book_path(spell), method: :delete%></td>
+        <td><%= link_to "Remove Spell", spell_book_path(spell), method: :delete%></td>
       </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 
-<%= link_to "Edit Book", edit_book_path(@book) %> &ensp;
-<%= link_to "View Spells", spells_path %> &ensp;
-<%= link_to "Create New Book", new_book_path %> &ensp;
-<%= link_to "View Books", books_path %> &ensp;
-<%= link_to "Delete Book", @book, method: :delete%>
+<%= link_to "Add Spell",  add_to_book_path%>

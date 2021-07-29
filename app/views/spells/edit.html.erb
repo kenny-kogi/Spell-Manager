@@ -1,7 +1,15 @@
-<h1>Edit Page</h1>
-<%= render 'form', spell: @spell %>
+<h1>Edit <%= @spell.name%></h1>
 
-<%= link_to "Cancel", spells_path %> &ensp;
-<%= link_to "Create New Book", new_book_path %> &ensp;
-<%= link_to "View Books", books_path %>
+<div>
+  <span class="left"><%= link_to "All Spells", spells_path %></span>
+  <span class="right"><%= link_to "Home", root_path %></span>
+</div>
+<br>
+<br>
+
+<div class="form">
+    <%= render 'form', spell: @spell %>
+</div>
+<br>
+<%= link_to "Delete Spell", @spell, method: :delete%>
 

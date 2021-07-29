@@ -9,7 +9,7 @@
 
   <div>
     <%= form.label :level %>
-    <%= form.number_field :level, max: 9, min: 0 %>
+    <%= form.select :level, Spell::LEVEL, prompt: 'Select Level'%>
   </div>
   <br>
   <div>
@@ -23,8 +23,8 @@
   </div>
     <br>
     <div>
-    <%= form.label :concentration %>
-    <%= form.select :concentration, options_for_select([['No', false], ['Yes', true]]) %>
+    <%= form.radio_button :concentration, false %> No<br />
+    <%= form.radio_button :concentration, true %> Yes<br />
     </div>
     <br>
     <div>

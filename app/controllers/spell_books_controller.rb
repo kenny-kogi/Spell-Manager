@@ -14,6 +14,7 @@ class SpellBooksController < ApplicationController
     @books = Book.all
     @spell = params[:spell_id]
     @spell_book = SpellBook.new
+    @spell_name = params[:spell_name]
   end
 
   def destroy
@@ -25,6 +26,6 @@ class SpellBooksController < ApplicationController
 
   private
   def spell_book_params
-    params.require(:spell_book).permit(:book_id, :spell_id)
+    params.require(:spell_book).permit(:book_id, :spell_id, :spell_name)
   end
 end

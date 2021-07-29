@@ -1,4 +1,10 @@
-<h1>Show Spell</h1>
+<h1>View <%= @spell.name%></h1>
+<div>
+  <span class="left"><%= link_to "All Spells", spells_path %></span>
+  <span class="right"><%= link_to "Home", root_path %></span>
+</div>
+<br>
+<br>
 <div>
   <table>
     <thead>
@@ -24,8 +30,5 @@
   </table>
 </div>
 
-<%= link_to "Edit Spell", edit_spell_path(@spell) %> &ensp;
-<%= link_to "View Spells", spells_path %> &ensp;
-<%= link_to "Create New Book", new_book_path %> &ensp;
-<%= link_to "View Books", books_path %>
+<%= link_to "Add "+@spell.name+" to Book", new_spell_book_path(spell_id: @spell.id, spell_name: @spell.name)%>
 

@@ -1,7 +1,12 @@
 class SpellsController < ApplicationController
   before_action :set_spell, only: [:show, :edit, :update, :destroy, :choose_book, :add_to_book]
   def index
-    @spells = Spell.all
+       
+    if params[:level]
+      @spells = Spell.where({level: params[:level]})
+    else
+      @spells = Spell.all 
+    end
   end
 
   def show
@@ -22,7 +27,7 @@ class SpellsController < ApplicationController
 
   def update
     if @spell.update(spell_params)
-      flash[:success] = "Successfully updated #{@spell.name}"
+      flash[:success] = "Successfully Edited #{@spell.name}"
       redirect_to spells_path
     else
       render :edit
@@ -39,22 +44,6 @@ class SpellsController < ApplicationController
     redirect_to spells_path
   end
   
-  # def choose_book
-  #   @spell_book = SpellBook.new
-  #   @books = Book.all
-  # end
-
-  # def add_to_book
-  #   @books = Book.all
-  #   @spell_book = @spell.spell_books.build(book_id: params[:spell_book][:book_id])
-  #   if @spell_book.save
-  #     flash[:success] = "Successfully updated #{@spell.name}"
-  #     redirect_to spells_path
-  #   else
-  #     render :choose_book
-  #   end
-  # end
-
   private
   def spell_params
     params.require(:spell).permit(:name, :level, :school, :concentration, :description, classes: [])

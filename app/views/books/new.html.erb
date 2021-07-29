@@ -1,6 +1,8 @@
-<h1>Add a Book</h1>
+<h1>Create New</h1>
+
+<%= link_to "All Books", books_path%>
+<%= link_to "Home", root_path%>
+
 <%= render 'form', book: @book %>
 
-<%= link_to "Create New Spell", new_spell_path %> &ensp;
-<%= link_to "View Spells", spells_path %> &ensp;
-<%= link_to "View Books", books_path %>  &ensp;
+

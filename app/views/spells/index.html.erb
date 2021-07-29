@@ -1,7 +1,52 @@
 <h1>All Spells</h1>
 
-<%= link_to "Create New Spell", new_spell_path %>&ensp;
-<%= link_to "Home", root_path %>
+<div>
+  <span class="left"><%= link_to "Create New Spell", new_spell_path %></span>
+  <span class="right"><%= link_to "Home", root_path %></span>
+</div>
+<br>
+<br>
+
+<%= form_for spells_path, method: :get do |form| %>
+<div class = "row">
+  <div class = "column">
+    <ul style="list-style-type:none">
+      <%= form.label :level %>
+      <% Spell::LEVEL.each do |c| %>
+      <li><%= form.check_box :level, { multiple: true }, c, false %></li>
+      <%= c %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class = "column">
+    <ul style="list-style-type:none">
+      <%= form.label :school %>
+      <% Spell::SCHOOL_OPTIONS.each do |c| %>
+      <li><%= form.check_box :school, { multiple: true }, c, false %></li>
+      <%= c %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class = "column">
+    <ul style="list-style-type:none">
+      <%= form.label :classes %>
+      <% Spell::CLASS_OPTIONS.each do |c| %>
+      <li><%= form.check_box :classes, { multiple: true }, c, false %></li>
+      <%= c %>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class = "button">
+  <%= form.submit "Apply Filter" %>
+</div>
+  <% end %>
+
+<br>
+<br>
+
 <table>
   <thead>
     <tr>

@@ -1,5 +1,10 @@
 <h1>Create New</h1>
-<%= link_to "All Spells", spells_path %> &ensp;
-<%= link_to "Home", root_path %>
+<div>
+  <span class="left"><%= link_to "All Spells", spells_path %></span>
+  <span class="right"><%= link_to "Home", root_path %></span>
+</div>
 <br>
-<%= render 'form', spell: @spell %>
+<br>
+<div class="form">
+    <%= render 'form', spell: @spell %>
+<div>

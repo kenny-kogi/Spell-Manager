@@ -1,5 +1,11 @@
-<h1>Add Spell to Book</h2>
-
+<h1>Add <%= @spell_name  %> to Book</h2>
+<div>
+  <span class="left"><%= link_to "All Spells", spells_path %></span>
+  <span class="right"><%= link_to "Home", root_path %></span>
+</div>
+<br>
+<br>
+<h2>Select Book:</h2>
 <%= form_for @spell_book do |form| %>
   <% if @spell_book.errors.any? %>
     <ul>
@@ -10,9 +16,5 @@
   <% end %>
   <%= form.hidden_field :spell_id, value: @spell %>
   <%= form.select :book_id, @books.collect { |book| [ book.name, book.id] } %>
-  <%= form.submit "Add to book" %>
+  <%= form.submit "Submit" %>
 <% end %>
-
-<%= link_to "Create New Spell", new_spell_path %> &ensp;
-<%= link_to "Create New Book", new_book_path %> &ensp;
-<%= link_to "View Books", books_path %>

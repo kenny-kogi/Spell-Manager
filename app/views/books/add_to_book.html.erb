@@ -1,0 +1,23 @@
+<h1>Add Spell to <%= @book.name%></h1>
+<div>
+  <span class="left"><%= link_to "Back to " + @book.name, book_path(@book)%></span>
+  <span class="right"><%= link_to "Home", root_path %></span>
+</div>
+<br>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Spell Name</th>
+      <th>Add to Book</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @spell.each do |spell| %>
+      <tr>
+        <td><%= link_to spell.name, spell_path(spell) %></td>
+        <td><%= link_to "Add to Book", new_spell_book_path(spell_id: spell.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
