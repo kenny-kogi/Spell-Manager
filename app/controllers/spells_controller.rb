@@ -1,9 +1,8 @@
 class SpellsController < ApplicationController
   before_action :set_spell, only: [:show, :edit, :update, :destroy, :choose_book, :add_to_book]
-  def index
-       
+  def index     
     if params[:level]
-      @spells = Spell.where({level: params[:level]})
+      @spells = @spells.search(params[:level])
     else
       @spells = Spell.all 
     end

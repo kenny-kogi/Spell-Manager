@@ -8,15 +8,17 @@ class Book < ApplicationRecord
     if field == 'name'
       return Book.order(:name)
     elsif field == 'spell_count'
-      book = Book.all
-      return Book.order()
+      count_arr = []
+      books = Book.all
+      books.each do |book|
+        count_arr.append(book.spells.count)
+      end
+      return Book.order(:count_arr)
     else
       return Book.order(:name)
     end
   end
 
-  def spell_count
-    @book.spells.count
-  end
+
 end
 

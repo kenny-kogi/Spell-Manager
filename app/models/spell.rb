@@ -14,5 +14,11 @@ class Spell < ApplicationRecord
   validates :level, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 9, message: 'must be between 0 & 9'}
 
   # validates_numericality_of :level, greater_than_or_equal_to: 0, less_than_or_equal_to: 9, message: 'must be between 0 & 9'
+
+
+  def self.search(params)
+    binding.pry 
+  end
+
 end
 
