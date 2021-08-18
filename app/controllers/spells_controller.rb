@@ -1,11 +1,25 @@
 class SpellsController < ApplicationController
   before_action :set_spell, only: [:show, :edit, :update, :destroy, :choose_book, :add_to_book]
-  def index     
-    if params[:level]
-      @spells = @spells.search(params[:level])
+  def index
+    if !params[:spell]
+      spells = Spell.all
+      @spell = Spell.new(level: nil, concentration: nil)
     else
-      @spells = Spell.all 
+      if params[:concentration]
+        spells = Spell.where(concentration: query_params[:concentration])
+      else
+        query_params[:concentration] = nil
+      end
+      if query_params[:level]
+        spells ||= spells.or(Spell.where(level: query_params[:level]))
+      else
+        query_params[:level] = nil
+      end
+      spells ||= spells.or(Spell.where(school: query_params[:schools])) if params[:school]
+      spells ||= spells.or(Spell.where(classes: query_params[:classes])) if params[:classes]
+      @spell = Spell.new(query_params)
     end
+    @spells = spells.order('level ASC')
   end
 
   def show
@@ -42,10 +56,20 @@ class SpellsController < ApplicationController
     flash[:success] = "Successfully deleted #{@spell.name}"
     redirect_to spells_path
   end
-  
+
+  def add_to_book
+    @spell = Spell.find params[:id]
+    @books = Book.all
+    @spell_book = SpellBook.new
+  end
+
   private
   def spell_params
     params.require(:spell).permit(:name, :level, :school, :concentration, :description, classes: [])
+  end
+
+  def query_params
+    params.require(:spell).permit(level: [], school: [], concentration: [], classes: [])
   end
 
   def set_spell

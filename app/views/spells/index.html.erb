@@ -7,14 +7,13 @@
 <br>
 <br>
 
-<%= form_for spells_path, method: :get do |form| %>
+<%= form_for @spell, url: spells_path, method: :get do |form| %>
 <div class = "row">
   <div class = "column">
     <ul style="list-style-type:none">
       <%= form.label :level %>
       <% Spell::LEVEL.each do |c| %>
-      <li><%= form.check_box :level, { multiple: true }, c, false %></li>
-      <%= c %>
+        <li><%= form.check_box :level, { multiple: true }, c, false %> <%= c %> </li>
       <% end %>
     </ul>
   </div>
@@ -23,8 +22,7 @@
     <ul style="list-style-type:none">
       <%= form.label :school %>
       <% Spell::SCHOOL_OPTIONS.each do |c| %>
-      <li><%= form.check_box :school, { multiple: true }, c, false %></li>
-      <%= c %>
+        <li><%= form.check_box :school, { multiple: true }, c, false %> <%= c %> </li>
       <% end %>
     </ul>
   </div>
@@ -33,11 +31,18 @@
     <ul style="list-style-type:none">
       <%= form.label :classes %>
       <% Spell::CLASS_OPTIONS.each do |c| %>
-      <li><%= form.check_box :classes, { multiple: true }, c, false %></li>
-      <%= c %>
+        <li><%= form.check_box :classes, { multiple: true }, c, false %> <%= c %> </li>
       <% end %>
     </ul>
   </div>
+  <div class="column">
+    <ul style="list-style-type:none">
+      <%= form.label :concentration %>
+      <% [["Yes", true], ["No", false]].each do |c| %>
+        <li><%= form.check_box :concentration, { multiple: true }, c[1], false %> <%= c[0] %> </li>
+      <% end %>
+    </ul>
+ </div>
 </div>
 <div class = "button">
   <%= form.submit "Apply Filter" %>
@@ -68,7 +73,7 @@
         <td><%= spell.concentration %> </td>
         <td>
         <div><%= link_to "Edit", edit_spell_path(spell)%></div>
-        <div><%= link_to "Add to Book", new_spell_book_path(spell_id: spell.id)%></div>        
+        <div><%= link_to "Add to Book", add_to_book_path(spell) %></div>
         </td>
       </tr>
     <% end %>
@@ -77,4 +82,3 @@
 
 
 
-       

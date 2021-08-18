@@ -34,14 +34,15 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book.delete
+    @book.destroy
     flash[:success] = "Successfully deleted #{@book.name}"
     redirect_to books_path
   end
 
-  def add_to_book
+  def add_spell
     @spell = Spell.all
     @book = Book.find params[:id]
+    @spell_book = SpellBook.new
   end
 
   private
@@ -52,4 +53,4 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:name)
   end
-end 
+end

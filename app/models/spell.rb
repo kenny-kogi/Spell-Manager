@@ -1,7 +1,7 @@
 class Spell < ApplicationRecord
   has_many :spell_books, dependent: :destroy
   has_many :books, through: :spells
-  
+
   LEVEL = [0, 1, 2, 3, 4, 5, 6 ,7 ,8 ,9]
   SCHOOL_OPTIONS = ['Conjuration', 'Necromancy', 'Evocation', 'Abjuration', 'Transmutation', 'Divination', 'Enchantment', 'Illusion']
   CLASS_OPTIONS = ['Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Sorcerer', 'Warlock', 'Wizard']
@@ -14,11 +14,5 @@ class Spell < ApplicationRecord
   validates :level, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 9, message: 'must be between 0 & 9'}
 
   # validates_numericality_of :level, greater_than_or_equal_to: 0, less_than_or_equal_to: 9, message: 'must be between 0 & 9'
-
-
-  def self.search(params)
-    binding.pry 
-  end
-
 end
 

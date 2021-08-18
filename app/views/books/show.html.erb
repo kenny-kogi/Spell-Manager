@@ -17,11 +17,11 @@
       <% @book.spells.each do |spell| %>
       <tr>
         <td><%= link_to spell.name, spell_path(spell) %></td>
-        <td><%= link_to "Remove Spell", spell_book_path(spell), method: :delete%></td>
+        <td><%= button_to "Remove Spell", spell_book_path(spell), method: :delete%></td>
       </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 
-<%= link_to "Add Spell",  add_to_book_path%>
+<%= link_to "Add Spell",  add_spell_path%>

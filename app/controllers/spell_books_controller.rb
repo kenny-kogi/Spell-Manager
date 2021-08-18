@@ -3,25 +3,17 @@ class SpellBooksController < ApplicationController
     @spell_book = SpellBook.new(spell_book_params)
     if @spell_book.save
       flash[:success] = "Successfully added #{@spell_book.spell.name} to #{@spell_book.book.name}"
-      redirect_to spells_path
     else
-      @books = Book.all
-      render :new
+      flash[:error] = @spell_book.errors.full_messages.join(", ")
     end
-  end
-  
-  def new
-    @books = Book.all
-    @spell = params[:spell_id]
-    @spell_book = SpellBook.new
-    @spell_name = params[:spell_name]
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
-    @spell_book = SpellBook.where('spell_id = ?', params[:id])
-    @spell_book.destroy_all
-    flash[:success] = "Successfully deleted from #{@spell_book.name}"
-    redirect_to spells_path
+    @spell_book = SpellBook.find_by(spell_id: params[:id])
+    @spell_book.destroy
+    flash[:success] = "Successfully deleted #{@spell_book.spell.name}"
+    redirect_to @spell_book.book
   end
 
   private

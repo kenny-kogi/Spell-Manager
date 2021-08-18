@@ -30,5 +30,5 @@
   </table>
 </div>
 
-<%= link_to "Add "+@spell.name+" to Book", new_spell_book_path(spell_id: @spell.id, spell_name: @spell.name)%>
+<%= link_to "Add "+@spell.name+" to Book", add_to_book_path(@spell) %>
 

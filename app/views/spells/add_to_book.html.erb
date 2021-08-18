@@ -1,4 +1,4 @@
-<h1>Add <%= @spell_name  %> to Book</h2>
+<h1>Add <%= @spell.name  %> to Book</h2>
 <div>
   <span class="left"><%= link_to "All Spells", spells_path %></span>
   <span class="right"><%= link_to "Home", root_path %></span>
@@ -14,7 +14,7 @@
     <% end %>
     </ul>
   <% end %>
-  <%= form.hidden_field :spell_id, value: @spell %>
+  <%= form.hidden_field :spell_id, value: @spell.id %>
   <%= form.select :book_id, @books.collect { |book| [ book.name, book.id] } %>
   <%= form.submit "Submit" %>
 <% end %>

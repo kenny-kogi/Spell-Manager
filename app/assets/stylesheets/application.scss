@@ -28,14 +28,9 @@ th {
   text-align: left;
 }
 
-body {
-  margin-left: 40px;
-  margin-right: 40px;
-}
-
 .column {
   float: left;
-  width: 33.33%;
+  width: 20%;
 }
 
 /* Clear floats after the columns */
@@ -47,9 +42,6 @@ body {
 
 .left {
   float: left;
-}
-.right {
-  float: right;
 }
 
 .form {

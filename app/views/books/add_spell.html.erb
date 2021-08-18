@@ -1,0 +1,40 @@
+<h1>Add Spell to <%= @book.name%></h1>
+<div>
+  <span class="left"><%= link_to "Back to " + @book.name, book_path(@book)%></span>
+  <span class="right"><%= link_to "Home", root_path %></span>
+</div>
+<br>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Spell Name</th>
+      <th>Add to Book</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @spell.each do |spell| %>
+      <tr>
+        <td><%= link_to spell.name, spell_path(spell) %></td>
+        <% if @book.spells.find_by(id: spell.id) %>
+        <td> Already in book </td>
+        <% else %>
+          <%= form_for @spell_book do |form| %>
+            <% if @spell_book.errors.any? %>
+              <ul>
+              <% @spell_book.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            <% end %>
+            <%= form.hidden_field :book_id, value: @book.id %>
+            <%= form.hidden_field :spell_id, value: spell.id %>
+            <td>
+              <%= form.submit "Add to Book" %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
